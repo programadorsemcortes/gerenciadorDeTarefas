@@ -1,6 +1,7 @@
 package br.com.mardonio.resources;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,12 @@ public class TarefasResource {
 	
 	@Autowired
 	private TarefaService service;
+	
+	@GetMapping
+	public ResponseEntity<List<Tarefa>> findAll() {
+		List<Tarefa> list = service.findAll();
+		return ResponseEntity.ok().body(list);
+	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Tarefa> find(@PathVariable Integer id){
