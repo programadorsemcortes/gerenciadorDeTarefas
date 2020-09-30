@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.mardonio.domain.Tarefa;
 import br.com.mardonio.repositories.TarefaRepository;
+import br.com.mardonio.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class TarefaService {
@@ -16,7 +17,8 @@ public class TarefaService {
 	
 	public Tarefa find(Integer id) {
 		Optional<Tarefa> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Tarefa.class.getName()));
 	}
 	
 }
