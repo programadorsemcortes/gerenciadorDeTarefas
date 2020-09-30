@@ -21,4 +21,9 @@ public class TarefaService {
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Tarefa.class.getName()));
 	}
 	
+	public Tarefa insert(Tarefa obj) {
+		obj.setId(null);
+		return repo.save(obj);
+	}
+	
 }
