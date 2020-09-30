@@ -3,6 +3,8 @@ package br.com.mardonio.resources;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +42,7 @@ public class TarefasResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> insert(@RequestBody Tarefa obj){
+	public ResponseEntity<Void> insert(@Valid @RequestBody Tarefa obj){
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 					.path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -49,7 +51,7 @@ public class TarefasResource {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> update(@RequestBody Tarefa obj, @PathVariable Integer id){
+	public ResponseEntity<Void> update(@Valid @RequestBody Tarefa obj, @PathVariable Integer id){
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
