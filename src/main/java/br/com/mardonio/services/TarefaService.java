@@ -26,4 +26,9 @@ public class TarefaService {
 		return repo.save(obj);
 	}
 	
+	public Tarefa update(Tarefa obj) {
+		find(obj.getId());
+		return repo.save(obj);
+	}
+	
 }
